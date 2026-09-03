@@ -1,0 +1,473 @@
+openapi: 3.0.3
+info:
+  title: Thêm phương tiện
+  description: ''
+  version: 1.0.0
+servers:
+- url: http://localhost:8080/api
+  description: Local server
+paths:
+  /vehicles:
+    post:
+      tags:
+      - Quản trị
+      summary: Thêm phương tiện
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleRequest'
+      responses:
+        '201':
+          description: Thêm phương tiện thành công
+        '400':
+          description: Dữ liệu không hợp lệ
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    MaKH:
+      name: maKH
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 1001
+    MaTX:
+      name: maTX
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 2001
+    MaChuyen:
+      name: maChuyen
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 3001
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+      - hoTen
+      - soDienThoai
+      - email
+      - matKhau
+      - vaiTro
+      properties:
+        hoTen:
+          type: string
+          example: Nguyễn Văn A
+        soDienThoai:
+          type: string
+          example: 0901234567
+        email:
+          type: string
+          format: email
+          example: nguyenvana@gmail.com
+        matKhau:
+          type: string
+          format: password
+          example: '12345678'
+        vaiTro:
+          type: string
+          enum:
+          - Khách hàng
+          - Tài xế
+          example: Khách hàng
+    LoginRequest:
+      type: object
+      required:
+      - soDienThoai
+      - matKhau
+      properties:
+        soDienThoai:
+          type: string
+          example: 0901234567
+        matKhau:
+          type: string
+          format: password
+          example: '12345678'
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiJ9...
+        vaiTro:
+          type: string
+          enum:
+          - Khách hàng
+          - Tài xế
+          - Quản trị viên
+        message:
+          type: string
+          example: Đăng nhập thành công
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1001
+        hoTen:
+          type: string
+          example: Nguyễn Văn A
+        soDienThoai:
+          type: string
+          example: 0901234567
+        email:
+          type: string
+          example: nguyenvana@gmail.com
+        vaiTro:
+          type: string
+          example: Khách hàng
+    Customer:
+      type: object
+      properties:
+        maKH:
+          type: integer
+          example: 1001
+        hoTen:
+          type: string
+          example: Nguyễn Văn A
+        soDienThoai:
+          type: string
+          example: 0901234567
+        email:
+          type: string
+          example: nguyenvana@gmail.com
+        diaChi:
+          type: string
+          example: TP. Hồ Chí Minh
+    CustomerUpdateRequest:
+      type: object
+      properties:
+        hoTen:
+          type: string
+        email:
+          type: string
+          format: email
+        diaChi:
+          type: string
+    Driver:
+      type: object
+      properties:
+        maTX:
+          type: integer
+          example: 2001
+        hoTen:
+          type: string
+          example: Trần Văn B
+        soDienThoai:
+          type: string
+          example: 0912345678
+        trangThai:
+          type: string
+          enum:
+          - Sẵn sàng
+          - Offline
+          - Đang nhận chuyến
+          example: Sẵn sàng
+        viTriHienTai:
+          type: string
+          example: Quận 1, TP. Hồ Chí Minh
+    DriverStatusRequest:
+      type: object
+      required:
+      - trangThai
+      properties:
+        trangThai:
+          type: string
+          enum:
+          - Sẵn sàng
+          - Offline
+          example: Sẵn sàng
+    Vehicle:
+      type: object
+      properties:
+        maPT:
+          type: integer
+          example: 5001
+        bienSo:
+          type: string
+          example: 51A-12345
+        mauXe:
+          type: string
+          example: Toyota Vios
+        maTX:
+          type: integer
+          example: 2001
+        maLoaiXe:
+          type: integer
+          example: 1
+    VehicleRequest:
+      type: object
+      required:
+      - bienSo
+      - mauXe
+      - maTX
+      - maLoaiXe
+      properties:
+        bienSo:
+          type: string
+        mauXe:
+          type: string
+        maTX:
+          type: integer
+        maLoaiXe:
+          type: integer
+    VehicleType:
+      type: object
+      properties:
+        maLoaiXe:
+          type: integer
+          example: 1
+        tenLoaiXe:
+          type: string
+          example: Xe 4 chỗ
+        moTa:
+          type: string
+          example: Xe phục vụ tối đa 4 hành khách
+    VehicleTypeRequest:
+      type: object
+      required:
+      - tenLoaiXe
+      properties:
+        tenLoaiXe:
+          type: string
+        moTa:
+          type: string
+    TripCreateRequest:
+      type: object
+      required:
+      - maKH
+      - diemDon
+      - diemDen
+      - maLoaiXe
+      properties:
+        maKH:
+          type: integer
+          example: 1001
+        diemDon:
+          type: string
+          example: 123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh
+        diemDen:
+          type: string
+          example: 01 Đồng Khởi, Quận 1, TP. Hồ Chí Minh
+        thoiGianDon:
+          type: string
+          format: date-time
+          example: '2026-09-03T18:30:00+07:00'
+        maLoaiXe:
+          type: integer
+          example: 1
+        yeuCauDacBiet:
+          type: string
+          example: Có hành lý
+    Trip:
+      type: object
+      properties:
+        maChuyen:
+          type: integer
+          example: 3001
+        maKH:
+          type: integer
+          example: 1001
+        maTX:
+          type: integer
+          nullable: true
+          example: 2001
+        diemDon:
+          type: string
+        diemDen:
+          type: string
+        thoiGianDat:
+          type: string
+          format: date-time
+        thoiGianDon:
+          type: string
+          format: date-time
+        trangThai:
+          type: string
+          enum:
+          - Đang tìm tài xế
+          - Đã tìm thấy tài xế
+          - Đang nhận chuyến
+          - Đang đi
+          - Hoàn thành
+          - Đã hủy
+          - Chờ thanh toán
+        soTien:
+          type: number
+          format: double
+          example: 85000
+    DriverTripActionRequest:
+      type: object
+      required:
+      - maTX
+      properties:
+        maTX:
+          type: integer
+          example: 2001
+    TripStatusRequest:
+      type: object
+      required:
+      - trangThai
+      properties:
+        trangThai:
+          type: string
+          enum:
+          - Đang nhận chuyến
+          - Đang đi
+          - Hoàn thành
+    LocationRequest:
+      type: object
+      required:
+      - viTriHienTai
+      properties:
+        viTriHienTai:
+          type: string
+          example: 10 Lê Lợi, Quận 1, TP. Hồ Chí Minh
+    CancelTripRequest:
+      type: object
+      required:
+      - nguoiHuy
+      properties:
+        nguoiHuy:
+          type: string
+          enum:
+          - Khách hàng
+          - Tài xế
+        lyDo:
+          type: string
+          example: Có việc đột xuất
+    FareResponse:
+      type: object
+      properties:
+        maChuyen:
+          type: integer
+        khoangCach:
+          type: number
+          format: double
+          example: 8.5
+        thoiGian:
+          type: number
+          format: double
+          example: 25
+        tienXe:
+          type: number
+          format: double
+          example: 70000
+        phuPhi:
+          type: number
+          format: double
+          example: 15000
+        tongTien:
+          type: number
+          format: double
+          example: 85000
+    PaymentRequest:
+      type: object
+      required:
+      - phuongThuc
+      properties:
+        phuongThuc:
+          type: string
+          enum:
+          - Tiền mặt
+          - Điện tử
+          example: Điện tử
+    Payment:
+      type: object
+      properties:
+        maTT:
+          type: integer
+          example: 4001
+        maChuyen:
+          type: integer
+          example: 3001
+        phuongThuc:
+          type: string
+          enum:
+          - Tiền mặt
+          - Điện tử
+        soTien:
+          type: number
+          format: double
+          example: 85000
+        trangThai:
+          type: string
+          enum:
+          - Chờ thanh toán
+          - Thành công
+          - Thất bại
+        thoiGianThanhToan:
+          type: string
+          format: date-time
+    RatingRequest:
+      type: object
+      required:
+      - maKH
+      - maTX
+      - soSao
+      properties:
+        maKH:
+          type: integer
+          example: 1001
+        maTX:
+          type: integer
+          example: 2001
+        soSao:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 5
+        noiDung:
+          type: string
+          example: Tài xế thân thiện và đúng giờ.
+    Rating:
+      type: object
+      properties:
+        maDG:
+          type: integer
+          example: 6001
+        maChuyen:
+          type: integer
+          example: 3001
+        maKH:
+          type: integer
+          example: 1001
+        maTX:
+          type: integer
+          example: 2001
+        soSao:
+          type: integer
+          example: 5
+        noiDung:
+          type: string
+    Report:
+      type: object
+      properties:
+        tongSoChuyen:
+          type: integer
+          example: 1250
+        tongDoanhThu:
+          type: number
+          format: double
+          example: 125000000
+        tyLeHoanThanh:
+          type: number
+          format: double
+          example: 92.5
+        tyLeHuy:
+          type: number
+          format: double
+          example: 7.5
+tags:
+- name: Quản trị
