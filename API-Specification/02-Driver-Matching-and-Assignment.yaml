@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Driver Matching and Assignment API
+  description: OpenAPI specification for BR02 - Driver Matching and Assignment.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR02:
+    get:
+      tags:
+        - Business Requirements
+      summary: Driver Matching and Assignment
+      description: The system supports finding and assigning a suitable driver for a ride.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR02'
+
+components:
+  schemas:
+    BR02:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR02
+        name:
+          type: string
+          example: Driver Matching and Assignment
+        description:
+          type: string
+          example: The system supports finding and assigning a suitable driver for a ride.

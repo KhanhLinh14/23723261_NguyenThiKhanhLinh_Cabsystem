@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Customer Management API
+  description: OpenAPI specification for BR04 - Customer Management.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR04:
+    get:
+      tags:
+        - Business Requirements
+      summary: Customer Management
+      description: The system supports managing customer information and trip history.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR04'
+
+components:
+  schemas:
+    BR04:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR04
+        name:
+          type: string
+          example: Customer Management
+        description:
+          type: string
+          example: The system supports managing customer information and trip history.

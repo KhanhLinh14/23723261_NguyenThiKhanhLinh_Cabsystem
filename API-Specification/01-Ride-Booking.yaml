@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Ride Booking API
+  description: OpenAPI specification for BR01 - Ride Booking.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR01:
+    get:
+      tags:
+        - Business Requirements
+      summary: Ride Booking
+      description: The system supports customers in creating ride booking requests.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR01'
+
+components:
+  schemas:
+    BR01:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR01
+        name:
+          type: string
+          example: Ride Booking
+        description:
+          type: string
+          example: The system supports customers in creating ride booking requests.

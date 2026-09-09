@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Operational Reporting API
+  description: OpenAPI specification for BR12 - Operational Reporting.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR12:
+    get:
+      tags:
+        - Business Requirements
+      summary: Operational Reporting
+      description: The system provides reports on trip volume, revenue, completion rate, cancellation rate, and driver performance.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR12'
+
+components:
+  schemas:
+    BR12:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR12
+        name:
+          type: string
+          example: Operational Reporting
+        description:
+          type: string
+          example: The system provides reports on trip volume, revenue, completion rate, cancellation rate, and driver performance.

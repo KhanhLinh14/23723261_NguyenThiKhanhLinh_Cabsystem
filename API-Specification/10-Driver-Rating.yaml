@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Driver Rating API
+  description: OpenAPI specification for BR10 - Driver Rating.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR10:
+    get:
+      tags:
+        - Business Requirements
+      summary: Driver Rating
+      description: The system supports customers in rating drivers after a trip is completed.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR10'
+
+components:
+  schemas:
+    BR10:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR10
+        name:
+          type: string
+          example: Driver Rating
+        description:
+          type: string
+          example: The system supports customers in rating drivers after a trip is completed.

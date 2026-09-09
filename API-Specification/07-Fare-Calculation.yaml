@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Fare Calculation API
+  description: OpenAPI specification for BR07 - Fare Calculation.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR07:
+    get:
+      tags:
+        - Business Requirements
+      summary: Fare Calculation
+      description: The system determines the amount the customer must pay after the trip is completed.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR07'
+
+components:
+  schemas:
+    BR07:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR07
+        name:
+          type: string
+          example: Fare Calculation
+        description:
+          type: string
+          example: The system determines the amount the customer must pay after the trip is completed.

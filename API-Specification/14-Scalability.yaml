@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Scalability API
+  description: OpenAPI specification for BR14 - Scalability.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR14:
+    get:
+      tags:
+        - Business Requirements
+      summary: Scalability
+      description: The system can scale to support more users and add new services, payment methods, and notification channels in the future.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR14'
+
+components:
+  schemas:
+    BR14:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR14
+        name:
+          type: string
+          example: Scalability
+        description:
+          type: string
+          example: The system can scale to support more users and add new services, payment methods, and notification channels in the future.

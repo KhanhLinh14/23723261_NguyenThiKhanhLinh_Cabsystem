@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Notifications API
+  description: OpenAPI specification for BR09 - Notifications.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR09:
+    get:
+      tags:
+        - Business Requirements
+      summary: Notifications
+      description: The system supports notifications about important events related to trips and payments.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR09'
+
+components:
+  schemas:
+    BR09:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR09
+        name:
+          type: string
+          example: Notifications
+        description:
+          type: string
+          example: The system supports notifications about important events related to trips and payments.

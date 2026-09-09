@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Operations Management API
+  description: OpenAPI specification for BR11 - Operations Management.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR11:
+    get:
+      tags:
+        - Business Requirements
+      summary: Operations Management
+      description: The system supports operations staff in managing and handling ride-booking activities.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR11'
+
+components:
+  schemas:
+    BR11:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR11
+        name:
+          type: string
+          example: Operations Management
+        description:
+          type: string
+          example: The system supports operations staff in managing and handling ride-booking activities.

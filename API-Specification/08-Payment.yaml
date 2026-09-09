@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Payment API
+  description: OpenAPI specification for BR08 - Payment.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR08:
+    get:
+      tags:
+        - Business Requirements
+      summary: Payment
+      description: The system supports cash and electronic payment methods.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR08'
+
+components:
+  schemas:
+    BR08:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR08
+        name:
+          type: string
+          example: Payment
+        description:
+          type: string
+          example: The system supports cash and electronic payment methods.

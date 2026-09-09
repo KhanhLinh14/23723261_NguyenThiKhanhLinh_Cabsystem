@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: CAB System - Security and Authorization API
+  description: OpenAPI specification for BR13 - Security and Authorization.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Business Requirements
+    description: CAB System business requirements
+
+paths:
+  /business-requirements/BR13:
+    get:
+      tags:
+        - Business Requirements
+      summary: Security and Authorization
+      description: The system protects data and controls access to administrative functions.
+      responses:
+        '200':
+          description: Business requirement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BR13'
+
+components:
+  schemas:
+    BR13:
+      type: object
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          example: BR13
+        name:
+          type: string
+          example: Security and Authorization
+        description:
+          type: string
+          example: The system protects data and controls access to administrative functions.
